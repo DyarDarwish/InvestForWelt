@@ -1,0 +1,55 @@
+{% extends "./base.html.twig" %}
+
+{% block body %}
+
+    <div class="w-4/5 m-auto text-center">
+        <div class="py-12 border-b border-gray-200">
+            <h1 class="text-6xl pt-12 pb-8">
+                Verfügbare Projekte ({{projekte|length}})
+            </h1>
+            <span class="font-light text-gray-500 italic">
+                Erstellt von Dyar
+            </span>
+        </div>
+    </div>
+
+    <div class="mx-auto w-4/5 my-8">
+            <a 
+                href="http://localhost/investforwelt/public/projekte/create" 
+                class="uppercase border border-gray-500 text-lg py-4 px-6 rounded transition transition-all bg-gray-800 text-white hover:bg-white hover:text-gray-800">
+                Neues Projekt erstellen
+            </a>
+        </div>
+
+    <div class="md:grid lg:grid-cols-3 gap-20 w-4/5 mx-auto py-15 ">
+        <!-- Review Item -->
+        {% for projekt in projekte %}
+            <div class="text-center pt-8 pb-4">
+               <img
+                    src="{{asset(projekt.getBildPath())}}"
+                    alt="no"
+                    class="shadow-xl rounded-md"
+                />
+                
+
+                <h2 class="text-gray-700 font-bold text-3xl py-2">
+                    {{ projekt.getProBez()}}
+                </h2>
+
+                <span class="text-gray-500">
+                    <span class="italic text-sm text-gray-800">Erstellt von Dyar | {{ projekt.getErstDatum|date("d/m/Y") }}
+                </span>
+                
+                <p class="text-base text-gray-700 pt-4 pb-10 leading-8 font-light">
+                    {{ projekt.getProBeschreibung() }}
+                </p>
+                
+                <a href="http://localhost/investforwelt/public/projekte/{{ projekt.getId() }}" class="uppercase border border-gray-500 text-gray-600 text-lg py-4 px-12 rounded transition transition-all hover:bg-gray-800 hover:text-white">
+                    Weiter lesen
+                </a>
+                
+                
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
